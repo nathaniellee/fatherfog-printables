@@ -173,19 +173,30 @@ function CharacterSheet({ character }) {
         <ScoreGroup title="Stats" fields={stats} character={character} />
         <ScoreGroup title="Saves" fields={saves} character={character} />
       </div>
-      <section className="sheet-section skills-section">
-        <h3>Skills</h3>
-        <ul className="ruled-list skills-list">
-          {character.skills.map((skill, index) => <li key={index}>{formatSkill(skill)}</li>)}
-        </ul>
-        <div className="skill-points"><span>Skill Points</span><strong>{character.skillPoints}</strong></div>
-      </section>
-      <section className="sheet-section equipment-section">
-        <h3>Equipment</h3>
-        <ul className="ruled-list">
-          {character.equipment.map((item, index) => <li key={index}>{item || '\u00a0'}</li>)}
-        </ul>
-      </section>
+      <div className="skills-and-equipment">
+        <section className="sheet-section skills-section">
+          <h3>Skills</h3>
+          <ul className="ruled-list skills-list">
+            {character.skills.map((skill, index) => {
+              const { name, relatedStats, bonus } = formatSkill(skill);
+              return (
+                <li key={index}>
+                  <span>{name}</span>
+                  <span className="skill-stats">{relatedStats}</span>
+                  <span className="skill-bonus">{bonus}</span>
+                </li>
+              );
+            })}
+          </ul>
+          <div className="skill-points"><span>Skill Points</span><strong>{character.skillPoints}</strong></div>
+        </section>
+        <section className="sheet-section equipment-section">
+          <h3>Equipment</h3>
+          <ul className="ruled-list">
+            {character.equipment.map((item, index) => <li key={index}>{item || '\u00a0'}</li>)}
+          </ul>
+        </section>
+      </div>
       <footer className="sheet-footer">Fatherfog / Convention character sheet</footer>
     </article>
   );

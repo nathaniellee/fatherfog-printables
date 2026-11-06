@@ -22,8 +22,10 @@ Letter and A4 paper are supported. Long lists can continue onto additional pages
 - Defense is blank at zero and otherwise shows the entered score.
 - Stats and saves appear side by side, each with three equal-width boxes showing
   centered uppercase labels above their centered values.
-- Skills show `Dancing {I • W} +15`, with Skill Points immediately afterwards.
-- Equipment is a vertical list.
+- Skills use three aligned columns for name, related stats (e.g. `I • W`, without
+  brackets), and signed bonus. Rows retain horizontal rules without vertical
+  dividers, with Skill Points immediately afterwards.
+- Equipment is a vertical list beside Skills, using equal-width columns.
 
 All scores are entered directly; class selection changes traits only, without
 applying any automatic stat adjustments. The initial character is illustrative,

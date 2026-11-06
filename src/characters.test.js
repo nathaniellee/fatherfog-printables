@@ -2,10 +2,16 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { classes, formatSkill, createExampleCharacter } from './characters.js';
 
-test('skills use stat order, bullet separators and a signed bonus', () => {
-  assert.equal(formatSkill({ name: 'Dancing', stats: ['I', 'W'], bonus: 15 }), 'Dancing {I \u2022 W} +15');
-  assert.equal(formatSkill({ name: 'Tinkering', stats: ['W', 'S', 'I'], bonus: 0 }), 'Tinkering {S \u2022 I \u2022 W} +0');
-  assert.equal(formatSkill({ name: 'Hiding', stats: ['W'], bonus: -5 }), 'Hiding {W} -5');
+test('skills format separate columns with ordered stats, no brackets and a signed bonus', () => {
+  assert.deepEqual(formatSkill({ name: 'Dancing', stats: ['I', 'W'], bonus: 15 }), {
+    name: 'Dancing', relatedStats: 'I \u2022 W', bonus: '+15',
+  });
+  assert.deepEqual(formatSkill({ name: 'Tinkering', stats: ['W', 'S', 'I'], bonus: 0 }), {
+    name: 'Tinkering', relatedStats: 'S \u2022 I \u2022 W', bonus: '+0',
+  });
+  assert.deepEqual(formatSkill({ name: 'Hiding', stats: ['W'], bonus: -5 }), {
+    name: 'Hiding', relatedStats: 'W', bonus: '-5',
+  });
 });
 
 test('all four classes have the supplied traits', () => {

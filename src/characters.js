@@ -22,7 +22,7 @@ export const statCodes = ['S', 'I', 'W'];
 export function formatSkill(skill) {
   const related = statCodes.filter((code) => skill.stats.includes(code));
   const bonus = skill.bonus >= 0 ? `+${skill.bonus}` : String(skill.bonus);
-  return `${skill.name} {${related.join(' \u2022 ')}} ${bonus}`;
+  return { name: skill.name, relatedStats: related.join(' \u2022 '), bonus };
 }
 
 export function createExampleCharacter() {
