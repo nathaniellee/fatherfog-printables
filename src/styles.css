@@ -85,11 +85,11 @@ h1 span { font-weight: normal; }
 .vital-caption { display: block; font-family: system-ui, sans-serif; font-size: 9px; margin-top: 5px; }
 .attributes, .skills-and-equipment { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
 .attributes .sheet-section { container-type: inline-size; }
-.score-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 1px solid black; margin: 0; }
+.score-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; }
 .score-list div { padding: 12px 2px; text-align: center; }
-.score-list div + div { border-left: 1px solid black; }
 .score-list dt { font-family: system-ui, sans-serif; font-size: clamp(6px, 3.5cqi, 12px); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 10px; }
-.score-list dd { margin: 0; font-size: 26px; line-height: 38px; }
+/* Lift Georgia's old-style numerals for optical centering. */
+.score-list dd { display: grid; place-items: center; width: min(64px, 100%); aspect-ratio: 1; border: 1px solid black; border-radius: 50%; margin: 0 auto; padding-bottom: .3em; font-size: clamp(16px, 8cqi, 26px); line-height: 1; }
 .ruled-list { list-style: none; margin: 0; padding: 0; min-height: 36px; }
 .ruled-list li { border-bottom: 1px solid #ccc; padding: 8px 0; font-size: 14px; line-height: 1.4; min-height: 36px; break-inside: avoid; }
 .skills-list { display: grid; grid-template-columns: minmax(0, 2fr) minmax(max-content, 1fr) minmax(max-content, 1fr); column-gap: 12px; }
