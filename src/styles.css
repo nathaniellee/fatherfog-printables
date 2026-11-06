@@ -1,0 +1,126 @@
+:root {
+  font-family: system-ui, sans-serif;
+  color: #272b28;
+  background: #f2efe8;
+  font-synthesis: none;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+button, input, select { font: inherit; }
+button { cursor: pointer; }
+button:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 3px solid #648777;
+  outline-offset: 3px;
+}
+
+.app-header {
+  max-width: 1380px;
+  margin: auto;
+  padding: 36px 32px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+h1 { font-family: Georgia, serif; font-size: 36px; margin: 6px 0; }
+h1 span { font-weight: normal; }
+.app-header p { margin: 0; color: #626960; font-size: 14px; }
+.print-button { background: #294a3b; color: white; border: 0; border-radius: 6px; padding: 13px 20px; font-weight: 600; }
+.print-button:hover { background: #1b3529; }
+.workspace { max-width: 1380px; margin: auto; padding: 0 32px 48px; display: grid; grid-template-columns: 340px minmax(0, 1fr); gap: 36px; align-items: start; }
+.editor { background: #faf9f5; border: 1px solid #dad8ce; border-radius: 8px; padding: 24px; }
+.editor h2, .preview-heading h2 { font-size: 17px; margin: 0; }
+.hint, .print-hint { font-size: 12px; color: #626960; line-height: 1.5; }
+.hint { margin: 8px 0 20px; }
+.editor label { display: flex; flex-direction: column; gap: 6px; font-size: 12px; font-weight: 600; margin-bottom: 14px; min-width: 0; }
+.editor input:not([type="checkbox"]), .editor select { width: 100%; padding: 8px; border: 1px solid #c9ccc3; border-radius: 4px; color: #272b28; background: white; }
+.editor fieldset { border: 0; border-top: 1px solid #deded5; margin: 18px 0 0; padding: 14px 0 0; min-width: 0; }
+.editor legend { font-size: 13px; font-weight: 700; padding: 0 8px 0 0; }
+.input-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.skill-editor { background: #efeee7; border-radius: 4px; padding: 12px; margin-bottom: 12px; display: grid; grid-template-columns: minmax(0, 1fr) 80px; gap: 0 10px; }
+.editor .related-stats { border: 0; padding: 0; margin: 0; display: flex; gap: 12px; }
+.related-stats legend { font-size: 11px; font-weight: 400; margin-bottom: 8px; }
+.editor .related-stats label { flex-direction: row; align-items: center; margin: 0; }
+.related-stats input { margin: 0; accent-color: #294a3b; }
+.secondary { border: 1px solid #b5bcb1; border-radius: 4px; padding: 7px 12px; background: transparent; font-size: 12px; }
+.subtle { border: 0; background: transparent; color: #744b40; font-size: 12px; padding: 6px 0; align-self: end; }
+.subtle:hover { text-decoration: underline; }
+.skill-points-editor { margin-top: 16px; }
+.equipment-editor { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: center; }
+.preview { min-width: 0; }
+.preview-heading { display: flex; justify-content: space-between; gap: 12px; margin: 0 auto 14px; max-width: 760px; align-items: baseline; }
+.preview-heading span { font-size: 11px; color: #626960; }
+.print-hint { max-width: 760px; margin: 14px auto 0; }
+
+.character-sheet {
+  background: white;
+  color: black;
+  width: 100%;
+  max-width: 760px;
+  min-height: 960px;
+  margin: auto;
+  padding: 40px;
+  box-shadow: 0 3px 18px #272b2814;
+  border: 1px solid #deded5;
+  font-family: Georgia, 'Times New Roman', serif;
+  overflow-wrap: anywhere;
+}
+.sheet-name { border-bottom: 3px double black; padding-bottom: 14px; }
+.sheet-name .eyebrow { font-family: system-ui, sans-serif; font-size: 10px; }
+.sheet-name h2 { font-size: 32px; line-height: 1.2; margin: 8px 0 0; }
+.sheet-section { margin-top: 22px; }
+.character-sheet h3 { font-size: 12px; font-family: system-ui, sans-serif; letter-spacing: .12em; text-transform: uppercase; border-bottom: 1px solid black; padding-bottom: 7px; margin: 0 0 10px; }
+.class-section h3 { display: flex; align-items: baseline; gap: 18px; }
+.class-section h3 span { font-family: Georgia, serif; font-size: 20px; letter-spacing: 0; text-transform: none; }
+.traits { padding-left: 18px; margin: 0; font-size: 14px; line-height: 1.5; }
+.traits li + li { margin-top: 5px; }
+.vitals { margin-top: 24px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 1px solid black; }
+.vital { padding: 12px; text-align: center; }
+.vital + .vital { border-left: 1px solid black; }
+.vital h3 { border: 0; padding: 0; }
+.vital-value { min-height: 38px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 26px; }
+.writing-space { display: inline-block; width: 44px; height: 32px; }
+.vital-caption { display: block; font-family: system-ui, sans-serif; font-size: 9px; margin-top: 5px; }
+.attributes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
+.score-list { margin: 0; }
+.score-list div { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #ccc; }
+.score-list dt { font-size: 14px; }
+.score-list dd { margin: 0; font-size: 20px; }
+.ruled-list { list-style: none; margin: 0; padding: 0; min-height: 36px; }
+.ruled-list li { border-bottom: 1px solid #ccc; padding: 8px 0; font-size: 14px; line-height: 1.4; min-height: 36px; break-inside: avoid; }
+.skill-points { display: flex; justify-content: space-between; align-items: center; padding-top: 12px; font-size: 14px; }
+.skill-points strong { font-size: 20px; font-weight: normal; }
+.sheet-footer { margin-top: 32px; border-top: 1px solid black; padding-top: 10px; text-transform: uppercase; letter-spacing: .1em; font-family: system-ui, sans-serif; font-size: 8px; }
+
+@media (max-width: 1000px) {
+  .workspace { grid-template-columns: 280px minmax(0, 1fr); gap: 20px; padding-inline: 20px; }
+  .editor { padding: 16px; }
+  .character-sheet { padding: 24px; }
+  .preview-heading { flex-direction: column; gap: 4px; }
+}
+
+@media (max-width: 760px) {
+  .app-header { padding: 24px 16px; flex-direction: column; align-items: start; gap: 16px; }
+  h1 { font-size: 30px; }
+  .workspace { grid-template-columns: minmax(0, 1fr); padding: 0 16px 32px; }
+  .character-sheet { min-height: 0; padding: 20px; }
+  .vital { padding: 10px 4px; }
+  .vital-value { font-size: 22px; gap: 4px; }
+  .writing-space { width: 30px; }
+}
+
+@page { margin: 12mm; }
+@media print {
+  :root, body { background: white; }
+  .app-header, .editor, .preview-heading, .print-hint { display: none !important; }
+  .workspace, .preview { display: block; padding: 0; margin: 0; max-width: none; }
+  .character-sheet { width: 100%; max-width: none; min-height: 0; border: 0; box-shadow: none; margin: 0; padding: 0; }
+  .sheet-name, .class-section, .vitals, .attributes, .skill-points, .sheet-footer { break-inside: avoid; }
+  .character-sheet h3 { break-after: avoid; }
+  .sheet-name h2 { font-size: 28px; }
+  .vital { padding: 12px; }
+  .writing-space { width: 44px; }
+  .vital-value { font-size: 26px; gap: 8px; }
+}
