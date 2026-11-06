@@ -84,10 +84,12 @@ h1 span { font-weight: normal; }
 .writing-space { display: inline-block; width: 44px; height: 32px; }
 .vital-caption { display: block; font-family: system-ui, sans-serif; font-size: 9px; margin-top: 5px; }
 .attributes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
-.score-list { margin: 0; }
-.score-list div { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #ccc; }
-.score-list dt { font-size: 14px; }
-.score-list dd { margin: 0; font-size: 20px; }
+.attributes .sheet-section { container-type: inline-size; }
+.score-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 1px solid black; margin: 0; }
+.score-list div { padding: 12px 2px; text-align: center; }
+.score-list div + div { border-left: 1px solid black; }
+.score-list dt { font-family: system-ui, sans-serif; font-size: clamp(6px, 3.5cqi, 12px); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 10px; }
+.score-list dd { margin: 0; font-size: 26px; line-height: 38px; }
 .ruled-list { list-style: none; margin: 0; padding: 0; min-height: 36px; }
 .ruled-list li { border-bottom: 1px solid #ccc; padding: 8px 0; font-size: 14px; line-height: 1.4; min-height: 36px; break-inside: avoid; }
 .skill-points { display: flex; justify-content: space-between; align-items: center; padding-top: 12px; font-size: 14px; }

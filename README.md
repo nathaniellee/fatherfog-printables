@@ -20,7 +20,8 @@ Letter and A4 paper are supported. Long lists can continue onto additional pages
 - Name, class and its traits appear first.
 - Health and Hope show a blank current value followed by `/ maximum`.
 - Defense is blank at zero and otherwise shows the entered score.
-- Stats and saves appear side by side.
+- Stats and saves appear side by side, each with three equal-width boxes showing
+  centered uppercase labels above their centered values.
 - Skills show `Dancing {I • W} +15`, with Skill Points immediately afterwards.
 - Equipment is a vertical list.
 
