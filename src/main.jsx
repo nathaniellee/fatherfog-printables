@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { classes, stats, saves, statCodes, formatSkill, createExampleCharacter } from './characters.js';
+import { readSavedCharacters, saveCharacter } from './storage.js';
 import './styles.css';
 
 function NumberField({ label, value, onChange }) {
@@ -20,7 +21,7 @@ function NumberField({ label, value, onChange }) {
   );
 }
 
-function CharacterEditor({ character, setCharacter }) {
+function CharacterEditor({ character, setCharacter, children }) {
   const update = (key, value) => setCharacter((previous) => ({ ...previous, [key]: value }));
   const updateSkill = (index, key, value) => {
     setCharacter((previous) => ({
@@ -34,6 +35,7 @@ function CharacterEditor({ character, setCharacter }) {
     <aside className="editor" aria-label="Character editor">
       <h2>Your character</h2>
       <p className="hint">Edit here; the sheet updates as you go. Scores are printed exactly as entered.</p>
+      {children}
       <label>
         Name
         <input value={character.name} onChange={(event) => update('name', event.target.value)} />
@@ -129,8 +131,7 @@ function CharacterEditor({ character, setCharacter }) {
 
 function ScoreGroup({ title, fields, character }) {
   return (
-    <section className="sheet-section">
-      <h3>{title}</h3>
+    <section className="sheet-section" aria-label={title}>
       <dl className="score-list">
         {fields.map((field) => (
           <div key={field}>
@@ -165,7 +166,6 @@ function CharacterSheet({ character }) {
                 ? (character.defense === 0 ? <span className="writing-space" aria-label="Blank defense" /> : character.defense)
                 : <><span className="writing-space" aria-label={`Current ${key}: blank`} /><span>/ {character[key]}</span></>}
             </div>
-            <span className="vital-caption">{key === 'defense' ? '\u00a0' : 'current / maximum'}</span>
           </section>
         ))}
       </div>
@@ -204,6 +204,51 @@ function CharacterSheet({ character }) {
 
 function App() {
   const [character, setCharacter] = useState(createExampleCharacter);
+  const [library, setLibrary] = useState(() => {
+    try {
+      return { characters: readSavedCharacters(window.localStorage), error: null };
+    } catch (error) {
+      return {
+        characters: [],
+        error: `Unable to load saved characters: ${error instanceof Error ? error.message : String(error)}`,
+      };
+    }
+  });
+  const [selectedId, setSelectedId] = useState('');
+  const [savedSnapshot, setSavedSnapshot] = useState(() => JSON.stringify(character));
+  const [message, setMessage] = useState(null);
+  const hasUnsavedChanges = JSON.stringify(character) !== savedSnapshot;
+  const notification = message || (library.error ? { type: 'error', text: library.error } : null);
+
+  function handleSave(asNew = false) {
+    try {
+      const id = !asNew && selectedId ? selectedId : crypto.randomUUID();
+      const characters = saveCharacter(window.localStorage, id, character);
+      setLibrary({ characters, error: null });
+      setSelectedId(id);
+      setSavedSnapshot(JSON.stringify(character));
+      setMessage({ type: 'success', text: `Saved "${character.name}" in this browser.` });
+    } catch (error) {
+      setMessage({
+        type: 'error',
+        text: `Unable to save character: ${error instanceof Error ? error.message : String(error)}`,
+      });
+    }
+  }
+
+  function handleLoad(id) {
+    const record = library.characters.find((saved) => saved.id === id);
+    if (!record) {
+      setMessage({ type: 'error', text: 'The selected saved character could not be found. Reload to refresh the list.' });
+      return;
+    }
+    if (hasUnsavedChanges && !window.confirm('You have unsaved changes. Load this character and discard them?')) return;
+    const loaded = structuredClone(record.character);
+    setCharacter(loaded);
+    setSelectedId(id);
+    setSavedSnapshot(JSON.stringify(loaded));
+    setMessage({ type: 'success', text: `Loaded "${loaded.name}".` });
+  }
 
   return (
     <>
@@ -216,7 +261,32 @@ function App() {
         <button className="print-button" onClick={() => window.print()}>Print character sheet</button>
       </header>
       <main className="workspace">
-        <CharacterEditor character={character} setCharacter={setCharacter} />
+        <CharacterEditor character={character} setCharacter={setCharacter}>
+          <div className="saved-characters">
+            <label htmlFor="saved-character">Saved characters</label>
+            <select
+              id="saved-character"
+              value={selectedId}
+              disabled={library.characters.length === 0}
+              onChange={(event) => handleLoad(event.target.value)}
+            >
+              <option value="" disabled>{library.characters.length ? 'Choose a character' : 'No saved characters yet'}</option>
+              {library.characters.map((record) => (
+                <option key={record.id} value={record.id}>{record.character.name}</option>
+              ))}
+            </select>
+            <div className="save-actions">
+              <button className="save-button" onClick={() => handleSave()}>{selectedId ? 'Save changes' : 'Save character'}</button>
+              {selectedId && <button className="secondary" onClick={() => handleSave(true)}>Save as new</button>}
+            </div>
+            <p className="hint">{hasUnsavedChanges ? 'Unsaved changes. ' : ''}Saved only in this browser; edits are not saved automatically.</p>
+            {notification && (
+              <p className={`storage-message ${notification.type}`} role={notification.type === 'error' ? 'alert' : 'status'}>
+                {notification.text}
+              </p>
+            )}
+          </div>
+        </CharacterEditor>
         <div className="preview">
           <div className="preview-heading">
             <h2>Print preview</h2>

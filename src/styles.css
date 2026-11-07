@@ -29,6 +29,8 @@ h1 span { font-weight: normal; }
 .app-header p { margin: 0; color: #626960; font-size: 14px; }
 .print-button { background: #294a3b; color: white; border: 0; border-radius: 6px; padding: 13px 20px; font-weight: 600; }
 .print-button:hover { background: #1b3529; }
+.save-button { background: #294a3b; color: white; border: 0; border-radius: 4px; padding: 8px 12px; font-size: 12px; }
+.save-button:hover { background: #1b3529; }
 .workspace { max-width: 1380px; margin: auto; padding: 0 32px 48px; display: grid; grid-template-columns: 340px minmax(0, 1fr); gap: 36px; align-items: start; }
 .editor { background: #faf9f5; border: 1px solid #dad8ce; border-radius: 8px; padding: 24px; }
 .editor h2, .preview-heading h2 { font-size: 17px; margin: 0; }
@@ -38,6 +40,11 @@ h1 span { font-weight: normal; }
 .editor input:not([type="checkbox"]), .editor select { width: 100%; padding: 8px; border: 1px solid #c9ccc3; border-radius: 4px; color: #272b28; background: white; }
 .editor fieldset { border: 0; border-top: 1px solid #deded5; margin: 18px 0 0; padding: 14px 0 0; min-width: 0; }
 .editor legend { font-size: 13px; font-weight: 700; padding: 0 8px 0 0; }
+.saved-characters { border-bottom: 1px solid #deded5; padding-bottom: 4px; margin-bottom: 18px; }
+.save-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.storage-message { font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; }
+.storage-message.success { color: #294a3b; }
+.storage-message.error { color: #8e3322; }
 .input-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
 .skill-editor { background: #efeee7; border-radius: 4px; padding: 12px; margin-bottom: 12px; display: grid; grid-template-columns: minmax(0, 1fr) 80px; gap: 0 10px; }
 .editor .related-stats { border: 0; padding: 0; margin: 0; display: flex; gap: 12px; }
@@ -82,7 +89,6 @@ h1 span { font-weight: normal; }
 .vital h3 { border: 0; padding: 0; }
 .vital-value { min-height: 38px; display: flex; align-items: center; justify-content: center; gap: 8px; font-size: 26px; }
 .writing-space { display: inline-block; width: 44px; height: 32px; }
-.vital-caption { display: block; font-family: system-ui, sans-serif; font-size: 9px; margin-top: 5px; }
 .attributes, .skills-and-equipment { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; }
 .attributes .sheet-section { container-type: inline-size; }
 .score-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin: 0; }
